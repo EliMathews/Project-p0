@@ -21,7 +21,6 @@ namespace PizzaWorld.Domain.Models
             {
                 return false;
             }
-            finally
         }
     }
 }

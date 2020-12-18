@@ -7,23 +7,17 @@ namespace PizzaWorld.Client
 {
     class Program
     {
+        private static readonly ClientSingleton _client = ClientSingleton.Instance;   // readonly only creates value for this field when application is running.
         static void Main(string[] args)
         {
-            var cs = ClientSingleton.Instance;
+            _client.MakeStore();
 
-            cs.MakeStore;
-            //PrintAllStores();
+            PrintAllStores();
         }
-        static IEnumerable<Store> GetAllStores()
-        {
-            return new List<Store>()
-            {
-                new Store()
-            };
-        }
+
         static void PrintAllStores()
         {
-            foreach(var store in GetAllStores())
+            foreach (var store in _client.Stores)
             {
                 System.Console.WriteLine(store);
             }

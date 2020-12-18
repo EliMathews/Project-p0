@@ -7,8 +7,9 @@ namespace PizzaWorld.Domain.Singletons
 {
    public class ClientSingleton
     {
-        private ClientSingleton _instance;
-        public ClientSingleton Instance 
+        private const string _path = @"./PizzaWorld.xml"; //The @ symbol prevents the '/' from acting as an escape character prefix
+        private static ClientSingleton _instance;
+        public static ClientSingleton Instance 
         {
             get
             {
@@ -22,27 +23,40 @@ namespace PizzaWorld.Domain.Singletons
         public List<Store> Stores { get; set; }
         private ClientSingleton()
         {
-            
-        }
-        public void GetAllStores()
-        {
-            Stores = new List<Store>();
-            
+            Read();
         }
         public void MakeStore()
         {
-            var s = new Store();
-
-            Stores.Add(s);
+            Stores.Add(new Store());
             Save();
         }
         private void Save()
         {
-            string path = @"PizzaWorld.xml";
-            var file = new StreamWriter(path);
+
+            var file = new StreamWriter(_path);
             var xml = new XmlSerializer(typeof(List<Store>));
 
             xml.Serialize(file, Stores);
+        }
+
+        private void Read()
+        {
+            if (File.Exists(_path))
+            {
+            
+            var file = new StreamReader(_path);
+            var xml = new XmlSerializer(typeof(List<Store>)); // Serializer understands the xml is a list of stores
+
+            Stores = xml.Deserialize(file) as List<Store>;
+
+            /*Serializer itself, does not know what a list of stores is, but it does know that 'file' is going to become an object.
+            Object is always the data type that deserializer returns. So, we need to explicitly convert the object to what we want 
+            the serializer to return, hence 'as List<Store>'.*/
+            }
+            else
+            {
+                Stores = new List<Store>();
+            }
         }
     }
 }
