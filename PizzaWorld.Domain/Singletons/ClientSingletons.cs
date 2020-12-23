@@ -1,3 +1,4 @@
+using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace PizzaWorld.Domain.Singletons
             }
         }
         public List<Store> Stores { get; set; }
+        public List<APizzaModel> Pizzas { get; set; }
+
         private ClientSingleton()
         {
             Read();
@@ -35,22 +38,28 @@ namespace PizzaWorld.Domain.Singletons
         public Store SelectStore()
         {
             int.TryParse(Console.ReadLine(), out int input); // 0, selection
-            return Stores.ElementAt(input);
+            return Stores.ElementAtOrDefault(input);
         }
         private void Save()
         {
 
-            var file = new StreamWriter(_path);
+            using (var file = new StreamWriter(_path))
+            {
+                
             var xml = new XmlSerializer(typeof(List<Store>));
 
             xml.Serialize(file, Stores);
+            }
         }
 
         private void Read()
         {
-            if (File.Exists(_path))
+            if (!File.Exists(_path))
             {
-            
+                Stores = new List<Store>();
+                return;
+            }
+
             var file = new StreamReader(_path);
             var xml = new XmlSerializer(typeof(List<Store>)); // Serializer understands the xml is a list of stores
 
@@ -59,11 +68,7 @@ namespace PizzaWorld.Domain.Singletons
             /*Serializer itself, does not know what a list of stores is, but it does know that 'file' is going to become an object.
             Object is always the data type that deserializer returns. So, we need to explicitly convert the object to what we want 
             the serializer to return, hence 'as List<Store>'.*/
-            }
-            else
-            {
-                Stores = new List<Store>();
-            }
+            
         }
     }
 }
