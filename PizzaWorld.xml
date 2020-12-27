@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Store>
+    <EntityID>0</EntityID>
     <Orders />
   </Store>
-  <Store />
+  <Store>
+    <EntityID>0</EntityID>
+    <Orders />
+  </Store>
+  <Store>
+    <EntityID>0</EntityID>
+    <Orders />
+  </Store>
 </ArrayOfStore>

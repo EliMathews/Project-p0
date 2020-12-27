@@ -34,7 +34,7 @@ namespace PizzaWorld.Client
         }
         static void PrintAllStoresWithEF()
         {
-            foreach (var store in _sql.ReadStores())
+            foreach (var store in _sql.ReadAll())
             {
                 System.Console.WriteLine(store);
             }
@@ -44,13 +44,14 @@ namespace PizzaWorld.Client
         {
             var user = new User();
 
-            PrintAllStores();
+            PrintAllStoresWithEF();
 
-            user.SelectedStore = _client.SelectStore();
+            user.SelectedStore = _sql.SelectStore();
             user.SelectedStore.CreateOrder();
             user.Orders.Add(user.SelectedStore.Orders.Last());
             user.Orders.Last().MakeMeatPizza();
             user.Orders.Last().MakeMeatPizza();
+            _sql.Update(user.SelectedStore);
 
             System.Console.WriteLine(user);
         }

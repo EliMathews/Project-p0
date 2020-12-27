@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PizzaWorld.Domain.Models;
@@ -10,14 +11,22 @@ namespace PizzaWorld.Client
         private readonly PizzaWorldContext _db = new PizzaWorldContext();
         public SqlClient()
         {
-            if (ReadStores().Count() == 0)
-            {
-                CreateStore();
-            }
+          
         }
-        public IEnumerable<Store> ReadStores()
+        public IEnumerable<Store> ReadAll()
         {
            return _db.Stores;
+        }
+        public Store ReadOne(string name)
+        {
+            return _db.Stores.FirstOrDefault(s => s.Name == name); //linq predicate
+            
+        }
+        public IEnumerable<Order> ReadOrders(Store store) //we want to make this generic
+        {
+            var s = ReadOne(store.Name);
+
+            return s.Orders;
         }
         public void Save(Store store)
         {
@@ -25,9 +34,17 @@ namespace PizzaWorld.Client
             _db.SaveChanges(); //git commit
 
         }
-        public void CreateStore()
+        public void Update(Store store)
         {
-            Save (new Store());
+            _db.SaveChanges();
         }
+        public Store SelectStore()
+        {
+            string input = Console.ReadLine();
+
+            return ReadOne(input);
+        }
+        //repository pattern
+        //CRUD for Storage - DML for SQL
     }
 }

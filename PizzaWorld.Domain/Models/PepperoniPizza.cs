@@ -3,7 +3,7 @@ using PizzaWorld.Domain.Abstracts;
 
 namespace PizzaWorld.Domain.Models
 {
-  public class MeatPizza : APizzaModel
+  public class PepperoniPizza : APizzaModel
   {
     protected override void AddCrust()
     {
