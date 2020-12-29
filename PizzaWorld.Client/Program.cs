@@ -17,6 +17,7 @@ namespace PizzaWorld.Client
         }
         static void Main(string[] args)
         {
+            Options.CustomerOrStorePrompt();
             //_client.MakeStore();
 
             //PrintAllStores();
@@ -53,7 +54,7 @@ namespace PizzaWorld.Client
             user.Orders.Last().MakeMeatPizza();
             _sql.Update(user.SelectedStore);
 
-            System.Console.WriteLine(user);
+            //System.Console.WriteLine(user);
         }
     }
 }
