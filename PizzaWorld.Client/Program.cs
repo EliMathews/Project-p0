@@ -18,12 +18,15 @@ namespace PizzaWorld.Client
         static void Main(string[] args)
         {
             Options.CustomerOrStorePrompt();
-            //_client.MakeStore();
-
-            //PrintAllStores();
-            //Console.WriteLine(_client.SelectStore());
+            Options.UserChoice();
+            
 
             UserView();
+            
+            
+            //_client.MakeStore();
+            //PrintAllStores();
+            //Console.WriteLine(_client.SelectStore());
         }
 
         static void PrintAllStores()
