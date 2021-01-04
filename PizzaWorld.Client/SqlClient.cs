@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaWorld.Domain.Models;
 using PizzaWorld.Storing;
 
@@ -8,7 +9,7 @@ namespace PizzaWorld.Client
 {
     public class SqlClient
     {
-        private readonly PizzaWorldContext _db = new PizzaWorldContext();
+        private static readonly PizzaWorldContext _db = new PizzaWorldContext();
         public SqlClient()
         {
           
@@ -46,5 +47,14 @@ namespace PizzaWorld.Client
         }
         //repository pattern
         //CRUD for Storage - DML for SQL
+/*         public void UserOrderHistory(User user)
+        {
+            var u = _db.Users
+                      .Include(u => u.Orders)
+                      .ThenInclude(o => o.Pizzas)
+                      .FirstOrDefault(u => u.EntityId == user.EntityId); // explicit loading
+            var o = u.Orders.Pizzas;
+            var p = _db.Pizzas.Select(s => s.EntityId == u.Pizzas);
+        } */
     }
 }

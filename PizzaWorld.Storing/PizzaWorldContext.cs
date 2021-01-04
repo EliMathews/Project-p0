@@ -9,7 +9,7 @@ namespace PizzaWorld.Storing
     {
         public DbSet<Store> Stores { get; set; }
         public DbSet<User> Users { get; set; }
-        //public DbSet<APizzaModel> Pizzas { get; set; }
+        public DbSet<APizzaModel> Pizzas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -22,6 +22,12 @@ namespace PizzaWorld.Storing
             builder.Entity<User>().HasKey(u => u.EntityID);
             builder.Entity<Order>().HasKey(o => o.EntityID);
             builder.Entity<APizzaModel>().HasKey(p => p.EntityID);
+           /*  builder.Entity<CheesePizza>().HasKey(cp => cp.EntityID);
+            builder.Entity<HawaiianPizza>().HasKey(hp => hp.EntityID);
+            builder.Entity<MeatPizza>().HasKey(mp => mp.EntityID);
+            builder.Entity<PepperoniPizza>().HasKey(pp => pp.EntityID);
+            builder.Entity<VeggiePizza>().HasKey(vp => vp.EntityID); */
+            //ADD DIFFERENT PIZZA MODELS.. TOPPINGS?
 
             SeedData(builder); // can do the same thing with pizzas, orders, etc (populates tables with stores)
             
@@ -34,6 +40,16 @@ namespace PizzaWorld.Storing
                     new Store() { EntityID = 3, Name = "Two"}
                 }
             );
-        }
+                builder.Entity<APizzaModel>().HasData(new List<APizzaModel>
+                {
+                    new APizzaModel() { EntityID = 1, Name = "Cheese Pizza"},
+                    new APizzaModel() { EntityID = 2, Name = "Hawaiian Pizza"},
+                    new APizzaModel() { EntityID = 3, Name = "Meat Pizza"},
+                    new APizzaModel() { EntityID = 4, Name = "Pepperoni Pizza"},
+                    new APizzaModel() { EntityID = 5, Name = "Veggie Pizza"}
+                }
+            );
+        } 
     }
 }
+

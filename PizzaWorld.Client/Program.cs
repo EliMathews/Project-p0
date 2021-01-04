@@ -11,22 +11,14 @@ namespace PizzaWorld.Client
         private static readonly ClientSingleton _client = ClientSingleton.Instance;   // readonly only creates value for this field when application is running.
         private readonly ClientSingleton _client2;
         private static readonly SqlClient _sql = new SqlClient();
-        public Program()
+        Program()
         {
             _client2 = ClientSingleton.Instance;
         }
         static void Main(string[] args)
         {
-            Options.CustomerOrStorePrompt();
-            Options.UserChoice();
-            
-
+            Options.StoreSelectionPrompt();
             UserView();
-            
-            
-            //_client.MakeStore();
-            //PrintAllStores();
-            //Console.WriteLine(_client.SelectStore());
         }
 
         static void PrintAllStores()
