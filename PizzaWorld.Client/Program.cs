@@ -30,9 +30,17 @@ namespace PizzaWorld.Client
         }
         static void PrintAllStoresWithEF()
         {
-            foreach (var store in _sql.ReadAll())
+            foreach (var store in _sql.ReadAllStores())
             {
                 System.Console.WriteLine(store);
+            }
+        }
+
+        static void PrintAllPizzasWithEF()
+        {
+            foreach (var pizza in _sql.ReadAllPizzas())
+            {
+                System.Console.WriteLine(pizza.Name);
             }
         }
 
@@ -52,10 +60,12 @@ namespace PizzaWorld.Client
             if (Access == 2)
             {
                 Console.WriteLine("You selected customer access.");
+                PrintAllPizzasWithEF();
+                Console.WriteLine("Select a pizza where 1 selects Cheese Pizza and 5 selects Veggie Pizza");
                 user.SelectedStore.CreateOrder();
-                user.Orders.Add(user.SelectedStore.Orders.Last());
-                user.Orders.Last().MakeMeatPizza();
-                _sql.Update(user.SelectedStore);
+                //user.Orders.Add(user.SelectedStore.Orders.Last());
+                //user.Orders.Last().MakeMeatPizza();
+                //_sql.Update(user.SelectedStore);
             }
             if (Access == 1)
             {

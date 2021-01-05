@@ -16,10 +16,12 @@ public List<string> Toppings { get; set; }
       AddCrust();
       AddSize();
       AddToppings();
+      AddPrice();
     }
 
     protected virtual void AddCrust() { }
     protected virtual void AddSize() { }
     protected virtual void AddToppings() { }
+    protected virtual void AddPrice() { }
   }
 }

@@ -40,7 +40,7 @@ namespace PizzaWorld.Storing
                     new Store() { EntityID = 3, Name = "Two"}
                 }
             );
-                builder.Entity<APizzaModel>().HasData(new List<APizzaModel>
+            builder.Entity<APizzaModel>().HasData(new List<APizzaModel>
                 {
                     new APizzaModel() { EntityID = 1, Name = "Cheese Pizza"},
                     new APizzaModel() { EntityID = 2, Name = "Hawaiian Pizza"},

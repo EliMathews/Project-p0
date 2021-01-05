@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PizzaWorld.Domain.Models;
 using PizzaWorld.Storing;
+using PizzaWorld.Domain.Abstracts;
 
 namespace PizzaWorld.Client
 {
@@ -14,10 +15,16 @@ namespace PizzaWorld.Client
         {
           
         }
-        public IEnumerable<Store> ReadAll()
+        public IEnumerable<Store> ReadAllStores()
         {
            return _db.Stores;
         }
+
+        public IEnumerable<APizzaModel> ReadAllPizzas()
+        {
+           return _db.Pizzas;
+        }
+
         public Store ReadOne(string name)
         {
             return _db.Stores.FirstOrDefault(s => s.Name == name); //linq predicate
